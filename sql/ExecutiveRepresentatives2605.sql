@@ -4,7 +4,7 @@
 
 --Your job is to return the names of the products and providers whose category ID is 6.
 
-SELECT p.name, f.name
-FROM products P INNER JOIN providers f 
-ON p.id_providers = f.id 
-WHERE p.id_categories = 6
+SELECT p.id, p.name
+FROM products P INNER JOIN categories c ON
+p.id_categories = c.id
+WHERE c.name LIKE 'super%'
