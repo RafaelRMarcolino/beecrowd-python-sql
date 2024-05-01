@@ -1,6 +1,12 @@
 # www.visualcrossing.com
 # https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/
 # pip install pandas
+# pip install "apache-airflow[celery]==2.9.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.0/constraints-3.8.txt"
+# instalando linux wsl --install
+# export AIRFLOW_HOME=~/apache-airflow
+# airflow standalone
+#admin  password: 77WnG5qhckTNB3ck
+#http://localhost:8080/
 
 import os
 from os.path import join
@@ -33,3 +39,5 @@ os.mkdir(file_path)
 dados.to_csv(file_path + 'dados_brutos.csv')
 dados[['datetime', 'tempmin', 'temp', 'tempmax']].to_csv(file_path + 'temperaturas.csv')
 dados[['datetime', 'tempmin', 'temp', 'tempmax']].to_csv(file_path + 'condicoes.csv')
+
+
