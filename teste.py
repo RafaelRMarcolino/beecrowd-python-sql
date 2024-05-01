@@ -1,4 +1,5 @@
-n = 5
+size = 5
 
-for i in range(n):
-    print(i)
+# Loop para iterar de size-1 até 1, em ordem decrescente
+for row in range(size-1, 0, -1):
+    print(row)
