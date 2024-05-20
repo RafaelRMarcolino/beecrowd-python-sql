@@ -1,0 +1,41 @@
+#instalação Kafka
+
+sudo apt update
+sudo apt -y update
+sudo apt install curl mlocate default-jdk -y
+java -version
+
+descompactar o kafka no linux
+ tar -xzf kafka_2.13-3.7.0.tgz
+
+renomear
+mv kafka_2.13-3.7.0 kafka
+
+iniciando o zookeeper
+~/kafka/bin$ ./zookeeper-server-start.sh ../config/zookeeper.properties
+
+iniciando o kafka
+/kafka/bin$ ./kafka-server-start.sh ../config/server.properties
+
+Aula 21 
+primiero exemplo 
+
+com os dois abertos
+
+iniciando o zookeeper
+~/kafka/bin$ ./zookeeper-server-start.sh ../config/zookeeper.properties
+
+iniciando o kafka
+/kafka/bin$ ./kafka-server-start.sh ../config/server.properties
+
+criar um  topico
+:~/kafka/bin$ ./kafka-topics.sh --create --topic ola-mundo --bootstrap-server localhost:9092
+Created topic ola-mundo.
+
+
+console para enviar mensagem
+~/kafka/bin$ ./kafka-console-producer.sh --topic ola-mundo --bootstrap-server localhost:9092
+
+console para ler as mensagens
+/kafka/bin$ ./kafka-console-consumer.sh --topic ola-mundo --from-beginning --bootstrap-server lo
+calhost:9092
