@@ -114,4 +114,87 @@ earliest: desde o inicio Latest: do fim (padrão)
 
 ******************************************
 
+28 -------------------------
+
+enviar mensagens
+:~/kafka/bin$ ./kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens
+
+ler as mensagens
+rafael@DESKTOP-21RUQLT:~/kafka/bin$ ./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --from-beginning
+
+
+ler mensagens de partições especifica
+./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --partition 0 --offset 1
+
+./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --partition 1 --offset 1
+
+./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --partition 0 --offset 2
+
+
+
+limitando o numero de mensagem
+./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --partition 0 --offset 2 --max-messages 1
+
+30---------------------- Grupo de consumidores ----------------------------
+
+./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --group consumidores
+
+ver todos os grupos
+./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+
+
+31 -------------------------------- CRIANDO CLUSTERS ------------------------------------------
+
+top zookeeper e kafka
+
+/kafka/bin$ ./kafka-server-stop.sh
+~/kafka/bin$ ./zookeeper-server-stop.sh
+
+exluindo pastas
+
+cd /TMP/
+:/tmp$ rm -r kafka*
+rafael@DESKTOP-21RUQLT:/tmp$ rm -r zookeeper/
+
+
+fazendo copias
+rafael@DESKTOP-21RUQLT:~/kafka/config$ cp server.properties  server.properties0
+rafael@DESKTOP-21RUQLT:~/kafka/config$ cp server.properties  server.properties1
+rafael@DESKTOP-21RUQLT:~/kafka/config$ cp server.properties  server.properties2
+
+Precisa mudar broker id, porta e log
+ediar o arquivo
+/kafka/config$ gedit server.properties0
+
+alterar
+broker.id=0
+broker.id=1
+broker.id=2
+
+log.dirs=/tmp/kafka-logs0
+log.dirs=/tmp/kafka-logs1
+log.dirs=/tmp/kafka-logs2
+
+
+listeners=PLAINTEXT://:9092
+listeners=PLAINTEXT://:9093
+listeners=PLAINTEXT://:9094
+
+apos alterar inicializar zookeeper
+~/kafka/bin$ ./zookeeper-server-start.sh ../config/zookeeper.properties
+
+iniciar properties / cluster funcionando
+/kafka/bin$ ./kafka-server-start.sh  ../config/server.properties0
+/kafka/bin$ ./kafka-server-start.sh  ../config/server.properties1
+/kafka/bin$ ./kafka-server-start.sh  ../config/server.properties2
+
+confirmar se o cluster funciona pelo zoopekeeper
+:~/kafka/bin$ ./zookeeper-shell.sh localhost:2181
+
+clusters
+ls /brokers/ids
+[0, 1, 2]
+
+cluster especifico
+ls /brokers/ids/1
 
