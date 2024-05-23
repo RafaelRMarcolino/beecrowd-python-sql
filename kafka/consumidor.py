@@ -11,3 +11,6 @@ for mensagem in consumidor:
     print("offset ", mensagem.offset)
     print("Mensagem ", mensagem.value)
     print("-------------------------------------")
+
+# ./kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic mensagens --group consumidores
+
