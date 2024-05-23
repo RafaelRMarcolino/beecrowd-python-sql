@@ -1,0 +1,14 @@
+sudo apt install python3-pip
+
+sudo -H pip install jupyter
+
+sudo pip install kafka-python
+
+inicializar jupyter notebook
+- jupyter notebook
+ 
+
+from kafka import KafkaProducer as kp
+import random
+produtor = kp(bootstrap_servers="127.0.0.1:9092")
+
